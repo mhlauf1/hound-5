@@ -22,11 +22,11 @@ export function StatsSection({data}: {data: StatsData}) {
           )}
           {data.bodyText && (
             <FadeIn delay={0.1}>
-              <div className="flex flex-col justify-end h-full">
+              <div className="flex lg:pl-20 xl:pl-32 flex-col justify-end h-full">
                 {data.bodyText.split('\n\n').map((paragraph, i) => (
                   <p
                     key={i}
-                    className={`font-sans text-base md:text-lg text-dark-brown/80 leading-relaxed ${i > 0 ? 'mt-4' : ''}`}
+                    className={`font-sans text-lg lg:text-xl text-dark-brown/80 leading-relaxed ${i > 0 ? 'mt-4' : ''}`}
                   >
                     {paragraph}
                   </p>

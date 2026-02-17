@@ -22,7 +22,7 @@ export function HeroSection({data}: {data: HeroData}) {
     <section className="bg-light-tan">
       {/* Hero Image — full bleed, navbar overlays this */}
       {data.heroImage?.asset && (
-        <div className="relative w-full h-[55vh] lg:h-[60vh]">
+        <div className="relative w-full h-[50vh] lg:h-[60vh]">
           <Image
             id={data.heroImage.asset._id}
             alt={data.heroImage.alt || 'Hero image'}
@@ -57,7 +57,7 @@ export function HeroSection({data}: {data: HeroData}) {
           {/* Left Column — 60% */}
           <div className="flex flex-col-reverse md:flex-col pt-4 md:pt-10 px-6 md:px-12  gap-4 w-full lg:w-[65%]">
             <FadeIn delay={0.2}>
-              <h1 className="font-serif max-w-[18ch] text-[40px] md:text-[56px] lg:[text-70px] xl:text-[88px] leading-[1.05] tracking-[-1px] text-brown">
+              <h1 className="font-serif max-w-[18ch] text-[42px] md:text-[56px] lg:[text-70px] xl:text-[88px] leading-[1.05] tracking-[-1px] text-brown">
                 {data.headline}
               </h1>
             </FadeIn>
@@ -95,7 +95,7 @@ export function HeroSection({data}: {data: HeroData}) {
       {/* Bottom accent grid — uses same flex layout as content above */}
       <div className="flex" style={{height: '25px'}}>
         <div className="w-[65%]" />
-        <div className="w-[600px] shrink-0 grid grid-cols-4 grid-rows-1">
+        <div className="w-full md:w-[600px] shrink-0 grid grid-cols-4 grid-rows-1">
           <div className="bg-light-tan border-l border-black/10" />
           <div className="bg-green" />
           <div className="bg-light-tan" />

@@ -35,7 +35,7 @@ export function ServicesSection({data}: {data: ServicesData}) {
       {/* Top accent row — lines up under hero rectangles */}
       <div className="flex" style={{height: '25px'}}>
         <div className="w-[65%]" />
-        <div className="w-[600px] shrink-0 grid grid-cols-4 grid-rows-1">
+        <div className="w-full md:w-[600px] shrink-0 grid grid-cols-4 grid-rows-1">
           <div className="bg-grey" />
           <div className="bg-dark-brown" />
           <div className="bg-orange" />
@@ -54,7 +54,7 @@ export function ServicesSection({data}: {data: ServicesData}) {
 
         {data.heading && (
           <FadeIn className="px-6 md:px-16" delay={0.1}>
-            <h2 className="mt-6 font-serif text-[28px] md:text-[36px] lg:text-[48px] leading-[1.25] text-white font-light max-w-6xl">
+            <h2 className="mt-6 font-serif text-[30px] md:text-[36px] lg:text-[48px] leading-[1.35] text-white font-light max-w-6xl">
               {data.heading}
             </h2>
           </FadeIn>
