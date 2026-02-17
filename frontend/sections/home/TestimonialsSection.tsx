@@ -31,7 +31,7 @@ export function TestimonialsSection({data}: {data: TestimonialsData}) {
   return (
     <section className="grid grid-cols-1 lg:grid-cols-2">
       {/* Left Column — Light tan background */}
-      <div className="bg-grey flex flex-col justify-between px-6 md:px-12 lg:px-16 py-16 md:py-24">
+      <div className="bg-grey flex flex-col justify-between px-6 md:px-12 lg:px-16 py-16 lg:py-24">
         <div>
           {data.badge?.text && (
             <FadeIn>
@@ -41,7 +41,7 @@ export function TestimonialsSection({data}: {data: TestimonialsData}) {
 
           {data.heading && (
             <FadeIn delay={0.1}>
-              <h2 className="mt-4 font-serif text-[32px] md:text-[54px] max-w-[12ch] lg:text-[64px] font-light leading-[1.05] text-dark-brown">
+              <h2 className="mt-4 font-serif mb-6 lg:mb-0 text-[36px] md:text-[54px] md:max-w-[12ch] lg:text-[64px] font-light leading-[1.2] text-dark-brown">
                 {data.heading}
               </h2>
             </FadeIn>
@@ -60,7 +60,7 @@ export function TestimonialsSection({data}: {data: TestimonialsData}) {
               >
                 {active && (
                   <div className="bg-white/60 p-8 md:p-10 flex flex-col justify-between min-h-[240px]">
-                    <p className="font-serif text-xl md:text-2xl font-light max-w-[90%] lg:text-[32px] text-dark-brown ">
+                    <p className="font-serif text-xl md:text-2xl font-light max-w-[95%] lg:text-[30px] text-dark-brown ">
                       &ldquo;{active.quote}&rdquo;
                     </p>
 

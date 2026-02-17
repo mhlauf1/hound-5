@@ -93,11 +93,11 @@ export function WhyChooseSection({data}: {data: WhyChooseData}) {
 
       {/* Mobile layout — stacked content over image */}
       <div className="relative h-full flex flex-col justify-end lg:hidden">
-        <div className="bg-light-tan p-6 md:p-10">
+        <div className="bg-light-tan pt-10 p-6 md:p-10">
           {data.badge?.text && <Badge text={data.badge.text} />}
 
           {data.heading && (
-            <h2 className="mt-4 font-serif text-[28px] md:text-[36px] leading-[1.05] text-dark-brown">
+            <h2 className="mt-4 font-serif text-[36px] md:text-[36px] leading-[1.15] text-dark-brown">
               {data.heading}
             </h2>
           )}
