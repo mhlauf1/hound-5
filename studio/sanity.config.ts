@@ -38,6 +38,8 @@ function resolveHref(documentType?: string, slug?: string): string | undefined {
       return slug ? `/posts/${slug}` : undefined
     case 'page':
       return slug ? `/${slug}` : undefined
+    case 'serviceOverview':
+      return slug ? `/services/${slug}` : undefined
     default:
       console.warn('Invalid document type:', documentType)
       return undefined
@@ -47,7 +49,7 @@ function resolveHref(documentType?: string, slug?: string): string | undefined {
 // Main Sanity configuration
 export default defineConfig({
   name: 'default',
-  title: 'Sanity + Next.js Starter Template',
+  title: 'Hound Around Resort',
 
   projectId,
   dataset,
@@ -66,7 +68,7 @@ export default defineConfig({
         mainDocuments: defineDocuments([
           {
             route: '/',
-            filter: `_type == "settings" && _id == "siteSettings"`,
+            filter: `_type == "homepage"`,
           },
           {
             route: '/:slug',
@@ -82,6 +84,11 @@ export default defineConfig({
           settings: defineLocations({
             locations: [homeLocation],
             message: 'This document is used on all pages',
+            tone: 'positive',
+          }),
+          homepage: defineLocations({
+            locations: [homeLocation],
+            message: 'This is the homepage',
             tone: 'positive',
           }),
           page: defineLocations({
@@ -114,6 +121,21 @@ export default defineConfig({
                   href: '/',
                 } satisfies DocumentLocation,
               ].filter(Boolean) as DocumentLocation[],
+            }),
+          }),
+          serviceOverview: defineLocations({
+            select: {
+              title: 'title',
+              slug: 'slug.current',
+            },
+            resolve: (doc) => ({
+              locations: [
+                {
+                  title: doc?.title || 'Untitled',
+                  href: resolveHref('serviceOverview', doc?.slug)!,
+                },
+                homeLocation,
+              ],
             }),
           }),
         },

@@ -102,7 +102,7 @@ export default function CustomPortableText({
   }
 
   return (
-    <div className={`prose-a:text-brand prose dark:prose-invert ${className}`}>
+    <div className={`prose-a:text-orange prose prose-headings:text-dark-brown prose-p:text-dark-brown/80 dark:prose-invert ${className}`}>
       <PortableText components={components} value={value} />
     </div>
   )

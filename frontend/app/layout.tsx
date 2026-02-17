@@ -2,20 +2,22 @@ import './globals.css'
 
 import {SpeedInsights} from '@vercel/speed-insights/next'
 import type {Metadata} from 'next'
-import {Inter, IBM_Plex_Mono} from 'next/font/google'
+import localFont from 'next/font/local'
 import {draftMode} from 'next/headers'
 import {toPlainText} from 'next-sanity'
 import {VisualEditing} from 'next-sanity/visual-editing'
 import {Toaster} from 'sonner'
+import {Geist} from 'next/font/google'
 
 import DraftModeToast from '@/app/components/DraftModeToast'
-import Footer from '@/app/components/Footer'
-import Header from '@/app/components/Header'
 import * as demo from '@/sanity/lib/demo'
 import {sanityFetch, SanityLive} from '@/sanity/lib/live'
 import {settingsQuery} from '@/sanity/lib/queries'
 import {resolveOpenGraphImage} from '@/sanity/lib/utils'
 import {handleError} from '@/app/client-utils'
+import Navbar from '@/components/global/Navbar'
+import Footer from '@/components/global/Footer'
+import {NavbarThemeProvider} from '@/components/global/NavbarThemeProvider'
 
 /**
  * Generate metadata for the page.
@@ -52,16 +54,26 @@ export async function generateMetadata(): Promise<Metadata> {
   }
 }
 
-const inter = Inter({
-  variable: '--font-inter',
-  subsets: ['latin'],
+const seasonMix = localFont({
+  src: [
+    {path: '../public/fonts/SeasonMix-TRIAL-Light.otf', weight: '300'},
+    {path: '../public/fonts/SeasonMix-TRIAL-Regular.otf', weight: '400'},
+  ],
+  variable: '--font-season-mix',
   display: 'swap',
 })
 
-const ibmPlexMono = IBM_Plex_Mono({
-  variable: '--font-ibm-plex-mono',
-  weight: ['400'],
+const helveticaNeue = localFont({
+  src: '../public/fonts/HelveticaNeueRoman.otf',
+  variable: '--font-helvetica-neue',
+  display: 'swap',
+})
+
+const geist = Geist({
   subsets: ['latin'],
+  weight: ['300', '400', '500', '600'],
+  style: ['normal'],
+  variable: '--font-geist',
   display: 'swap',
 })
 
@@ -69,25 +81,25 @@ export default async function RootLayout({children}: {children: React.ReactNode}
   const {isEnabled: isDraftMode} = await draftMode()
 
   return (
-    <html lang="en" className={`${inter.variable} ${ibmPlexMono.variable} bg-white text-black`}>
+    <html
+      lang="en"
+      className={`${seasonMix.variable} ${geist.variable}  ${helveticaNeue.variable}`}
+    >
       <body>
-        <section className="min-h-screen pt-24">
-          {/* The <Toaster> component is responsible for rendering toast notifications used in /app/client-utils.ts and /app/components/DraftModeToast.tsx */}
+        <NavbarThemeProvider>
           <Toaster />
           {isDraftMode && (
             <>
               <DraftModeToast />
-              {/*  Enable Visual Editing, only to be rendered when Draft Mode is enabled */}
               <VisualEditing />
             </>
           )}
-          {/* The <SanityLive> component is responsible for making all sanityFetch calls in your application live, so should always be rendered. */}
           <SanityLive onError={handleError} />
-          <Header />
-          <main className="">{children}</main>
+          <Navbar />
+          <main>{children}</main>
           <Footer />
-        </section>
-        <SpeedInsights />
+          <SpeedInsights />
+        </NavbarThemeProvider>
       </body>
     </html>
   )

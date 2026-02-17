@@ -156,6 +156,57 @@ export const settings = defineType({
         }),
       ],
     }),
+    defineField({
+      name: 'tagline',
+      title: 'Tagline',
+      type: 'string',
+      description: 'Short tagline for the footer and elsewhere',
+    }),
+    defineField({
+      name: 'phone',
+      title: 'Phone Number',
+      type: 'string',
+    }),
+    defineField({
+      name: 'email',
+      title: 'Email',
+      type: 'string',
+    }),
+    defineField({
+      name: 'address',
+      title: 'Address',
+      type: 'object',
+      fields: [
+        defineField({name: 'street', title: 'Street', type: 'string'}),
+        defineField({name: 'city', title: 'City', type: 'string'}),
+        defineField({name: 'state', title: 'State', type: 'string'}),
+        defineField({name: 'zip', title: 'ZIP', type: 'string'}),
+      ],
+    }),
+    defineField({
+      name: 'socialLinks',
+      title: 'Social Links',
+      type: 'array',
+      of: [
+        defineArrayMember({
+          type: 'object',
+          fields: [
+            defineField({
+              name: 'platform',
+              title: 'Platform',
+              type: 'string',
+              options: {
+                list: ['facebook', 'instagram', 'twitter', 'youtube', 'tiktok', 'yelp', 'google'],
+              },
+            }),
+            defineField({name: 'url', title: 'URL', type: 'url'}),
+          ],
+          preview: {
+            select: {title: 'platform', subtitle: 'url'},
+          },
+        }),
+      ],
+    }),
   ],
   preview: {
     prepare() {

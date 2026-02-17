@@ -99,3 +99,71 @@ export const pagesSlugs = defineQuery(`
   *[_type == "page" && defined(slug.current)]
   {"slug": slug.current}
 `)
+
+export const homepageQuery = defineQuery(`
+  *[_type == "homepage"][0]{
+    _id,
+    _type,
+    hero {
+      badge,
+      headline,
+      subline,
+      bodyText,
+      cta,
+      heroImage {
+        ...,
+        asset->
+      }
+    },
+    services {
+      badge,
+      heading,
+      "servicesList": services[]->{
+        _id,
+        title,
+        "slug": slug.current,
+        shortDescription,
+        icon,
+        order
+      } | order(order asc),
+      cta
+    },
+    whyChoose {
+      badge,
+      heading,
+      bodyText,
+      features,
+      cta,
+      image {
+        ...,
+        asset->
+      }
+    },
+    stats {
+      heading,
+      bodyText,
+      "statsList": stats[]->{
+        _id,
+        number,
+        label,
+        accentColor,
+        order
+      } | order(order asc)
+    },
+    testimonials {
+      badge,
+      heading,
+      "testimonialsList": testimonials[]->{
+        _id,
+        quote,
+        authorName,
+        authorLabel,
+        rating
+      },
+      image {
+        ...,
+        asset->
+      }
+    }
+  }
+`)

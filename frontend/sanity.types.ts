@@ -13,6 +13,144 @@
  */
 
 // Source: ../sanity.schema.json
+export type Cta = {
+  label?: string
+  href?: string
+  style?: 'solid' | 'outline'
+}
+
+export type ServicesCta = {
+  label?: string
+  href?: string
+  style?: 'solid' | 'outline'
+}
+
+export type WhyChooseCta = {
+  label?: string
+  href?: string
+  style?: 'solid' | 'outline'
+}
+
+export type TestimonialReference = {
+  _ref: string
+  _type: 'reference'
+  _weak?: boolean
+  [internalGroqTypeReferenceTo]?: 'testimonial'
+}
+
+export type SanityImageAssetReference = {
+  _ref: string
+  _type: 'reference'
+  _weak?: boolean
+  [internalGroqTypeReferenceTo]?: 'sanity.imageAsset'
+}
+
+export type TestimonialsSection = {
+  _type: 'testimonialsSection'
+  badge?: Badge
+  heading?: string
+  testimonials?: Array<
+    {
+      _key: string
+    } & TestimonialReference
+  >
+  image?: {
+    asset?: SanityImageAssetReference
+    media?: unknown
+    hotspot?: SanityImageHotspot
+    crop?: SanityImageCrop
+    alt?: string
+    _type: 'image'
+  }
+}
+
+export type StatItemReference = {
+  _ref: string
+  _type: 'reference'
+  _weak?: boolean
+  [internalGroqTypeReferenceTo]?: 'statItem'
+}
+
+export type StatsSection = {
+  _type: 'statsSection'
+  heading?: string
+  bodyText?: string
+  stats?: Array<
+    {
+      _key: string
+    } & StatItemReference
+  >
+}
+
+export type WhyChooseSection = {
+  _type: 'whyChooseSection'
+  badge?: Badge
+  heading?: string
+  bodyText?: BlockContentTextOnly
+  features?: Array<
+    {
+      _key: string
+    } & Feature
+  >
+  cta?: WhyChooseCta
+  image?: {
+    asset?: SanityImageAssetReference
+    media?: unknown
+    hotspot?: SanityImageHotspot
+    crop?: SanityImageCrop
+    alt?: string
+    _type: 'image'
+  }
+}
+
+export type ServiceOverviewReference = {
+  _ref: string
+  _type: 'reference'
+  _weak?: boolean
+  [internalGroqTypeReferenceTo]?: 'serviceOverview'
+}
+
+export type ServicesListSection = {
+  _type: 'servicesListSection'
+  badge?: Badge
+  heading?: string
+  services?: Array<
+    {
+      _key: string
+    } & ServiceOverviewReference
+  >
+  cta?: ServicesCta
+}
+
+export type HeroSection = {
+  _type: 'heroSection'
+  badge?: Badge
+  headline: string
+  subline?: string
+  bodyText?: string
+  cta?: Cta
+  heroImage?: {
+    asset?: SanityImageAssetReference
+    media?: unknown
+    hotspot?: SanityImageHotspot
+    crop?: SanityImageCrop
+    alt?: string
+    _type: 'image'
+  }
+}
+
+export type Feature = {
+  _type: 'feature'
+  label?: string
+  icon?: string
+}
+
+export type Badge = {
+  _type: 'badge'
+  text?: string
+  dotColor?: 'orange' | 'green' | 'brown'
+}
+
 export type PageReference = {
   _ref: string
   _type: 'reference'
@@ -34,13 +172,6 @@ export type Link = {
   page?: PageReference
   post?: PostReference
   openInNewTab?: boolean
-}
-
-export type SanityImageAssetReference = {
-  _ref: string
-  _type: 'reference'
-  _weak?: boolean
-  [internalGroqTypeReferenceTo]?: 'sanity.imageAsset'
 }
 
 export type CallToAction = {
@@ -125,6 +256,78 @@ export type Button = {
   link?: Link
 }
 
+export type ServiceOverview = {
+  _id: string
+  _type: 'serviceOverview'
+  _createdAt: string
+  _updatedAt: string
+  _rev: string
+  title: string
+  slug: Slug
+  shortDescription?: string
+  icon?: string
+  order: number
+}
+
+export type Slug = {
+  _type: 'slug'
+  current: string
+  source?: string
+}
+
+export type StatItem = {
+  _id: string
+  _type: 'statItem'
+  _createdAt: string
+  _updatedAt: string
+  _rev: string
+  number: string
+  label: string
+  accentColor?: 'orange' | 'green' | 'brown' | 'grey'
+  order: number
+}
+
+export type Testimonial = {
+  _id: string
+  _type: 'testimonial'
+  _createdAt: string
+  _updatedAt: string
+  _rev: string
+  quote: string
+  authorName: string
+  authorLabel?: string
+  rating?: number
+}
+
+export type Homepage = {
+  _id: string
+  _type: 'homepage'
+  _createdAt: string
+  _updatedAt: string
+  _rev: string
+  hero?: HeroSection
+  services?: ServicesListSection
+  whyChoose?: WhyChooseSection
+  stats?: StatsSection
+  testimonials?: TestimonialsSection
+}
+
+export type SanityImageCrop = {
+  _type: 'sanity.imageCrop'
+  top: number
+  bottom: number
+  left: number
+  right: number
+}
+
+export type SanityImageHotspot = {
+  _type: 'sanity.imageHotspot'
+  x: number
+  y: number
+  height: number
+  width: number
+}
+
 export type Settings = {
   _id: string
   _type: 'settings'
@@ -163,22 +366,20 @@ export type Settings = {
     metadataBase?: string
     _type: 'image'
   }
-}
-
-export type SanityImageCrop = {
-  _type: 'sanity.imageCrop'
-  top: number
-  bottom: number
-  left: number
-  right: number
-}
-
-export type SanityImageHotspot = {
-  _type: 'sanity.imageHotspot'
-  x: number
-  y: number
-  height: number
-  width: number
+  tagline?: string
+  phone?: string
+  email?: string
+  address?: {
+    street?: string
+    city?: string
+    state?: string
+    zip?: string
+  }
+  socialLinks?: Array<{
+    platform?: 'facebook' | 'instagram' | 'twitter' | 'youtube' | 'tiktok' | 'yelp' | 'google'
+    url?: string
+    _key: string
+  }>
 }
 
 export type Page = {
@@ -246,12 +447,6 @@ export type Person = {
     alt?: string
     _type: 'image'
   }
-}
-
-export type Slug = {
-  _type: 'slug'
-  current: string
-  source?: string
 }
 
 export type SanityAssistInstructionTask = {
@@ -488,23 +683,40 @@ export type Geopoint = {
 }
 
 export type AllSanitySchemaTypes =
+  | Cta
+  | ServicesCta
+  | WhyChooseCta
+  | TestimonialReference
+  | SanityImageAssetReference
+  | TestimonialsSection
+  | StatItemReference
+  | StatsSection
+  | WhyChooseSection
+  | ServiceOverviewReference
+  | ServicesListSection
+  | HeroSection
+  | Feature
+  | Badge
   | PageReference
   | PostReference
   | Link
-  | SanityImageAssetReference
   | CallToAction
   | InfoSection
   | BlockContentTextOnly
   | BlockContent
   | Button
-  | Settings
+  | ServiceOverview
+  | Slug
+  | StatItem
+  | Testimonial
+  | Homepage
   | SanityImageCrop
   | SanityImageHotspot
+  | Settings
   | Page
   | PersonReference
   | Post
   | Person
-  | Slug
   | SanityAssistInstructionTask
   | SanityAssistTaskStatus
   | SanityAssistSchemaTypeAnnotations
@@ -570,6 +782,20 @@ export type SettingsQueryResult = {
     metadataBase?: string
     _type: 'image'
   }
+  tagline?: string
+  phone?: string
+  email?: string
+  address?: {
+    street?: string
+    city?: string
+    state?: string
+    zip?: string
+  }
+  socialLinks?: Array<{
+    platform?: 'facebook' | 'google' | 'instagram' | 'tiktok' | 'twitter' | 'yelp' | 'youtube'
+    url?: string
+    _key: string
+  }>
 } | null
 
 // Source: sanity/lib/queries.ts
@@ -812,6 +1038,154 @@ export type PagesSlugsResult = Array<{
   slug: string
 }>
 
+// Source: sanity/lib/queries.ts
+// Variable: homepageQuery
+// Query: *[_type == "homepage"][0]{    _id,    _type,    hero {      badge,      headline,      subline,      bodyText,      cta,      heroImage {        ...,        asset->      }    },    services {      badge,      heading,      "servicesList": services[]->{        _id,        title,        "slug": slug.current,        shortDescription,        icon,        order      } | order(order asc),      cta    },    whyChoose {      badge,      heading,      bodyText,      features,      cta,      image {        ...,        asset->      }    },    stats {      heading,      bodyText,      "statsList": stats[]->{        _id,        number,        label,        accentColor,        order      } | order(order asc)    },    testimonials {      badge,      heading,      "testimonialsList": testimonials[]->{        _id,        quote,        authorName,        authorLabel,        rating      },      image {        ...,        asset->      }    }  }
+export type HomepageQueryResult = {
+  _id: string
+  _type: 'homepage'
+  hero: {
+    badge: Badge | null
+    headline: string
+    subline: string | null
+    bodyText: string | null
+    cta: Cta | null
+    heroImage: {
+      asset: {
+        _id: string
+        _type: 'sanity.imageAsset'
+        _createdAt: string
+        _updatedAt: string
+        _rev: string
+        originalFilename?: string
+        label?: string
+        title?: string
+        description?: string
+        altText?: string
+        sha1hash?: string
+        extension?: string
+        mimeType?: string
+        size?: number
+        assetId?: string
+        uploadId?: string
+        path?: string
+        url?: string
+        metadata?: SanityImageMetadata
+        source?: SanityAssetSourceData
+      } | null
+      media?: unknown
+      hotspot?: SanityImageHotspot
+      crop?: SanityImageCrop
+      alt?: string
+      _type: 'image'
+    } | null
+  } | null
+  services: {
+    badge: Badge | null
+    heading: string | null
+    servicesList: Array<{
+      _id: string
+      title: string
+      slug: string
+      shortDescription: string | null
+      icon: string | null
+      order: number
+    }> | null
+    cta: ServicesCta | null
+  } | null
+  whyChoose: {
+    badge: Badge | null
+    heading: string | null
+    bodyText: BlockContentTextOnly | null
+    features: Array<
+      {
+        _key: string
+      } & Feature
+    > | null
+    cta: WhyChooseCta | null
+    image: {
+      asset: {
+        _id: string
+        _type: 'sanity.imageAsset'
+        _createdAt: string
+        _updatedAt: string
+        _rev: string
+        originalFilename?: string
+        label?: string
+        title?: string
+        description?: string
+        altText?: string
+        sha1hash?: string
+        extension?: string
+        mimeType?: string
+        size?: number
+        assetId?: string
+        uploadId?: string
+        path?: string
+        url?: string
+        metadata?: SanityImageMetadata
+        source?: SanityAssetSourceData
+      } | null
+      media?: unknown
+      hotspot?: SanityImageHotspot
+      crop?: SanityImageCrop
+      alt?: string
+      _type: 'image'
+    } | null
+  } | null
+  stats: {
+    heading: string | null
+    bodyText: string | null
+    statsList: Array<{
+      _id: string
+      number: string
+      label: string
+      accentColor: 'brown' | 'green' | 'grey' | 'orange' | null
+      order: number
+    }> | null
+  } | null
+  testimonials: {
+    badge: Badge | null
+    heading: string | null
+    testimonialsList: Array<{
+      _id: string
+      quote: string
+      authorName: string
+      authorLabel: string | null
+      rating: number | null
+    }> | null
+    image: {
+      asset: {
+        _id: string
+        _type: 'sanity.imageAsset'
+        _createdAt: string
+        _updatedAt: string
+        _rev: string
+        originalFilename?: string
+        label?: string
+        title?: string
+        description?: string
+        altText?: string
+        sha1hash?: string
+        extension?: string
+        mimeType?: string
+        size?: number
+        assetId?: string
+        uploadId?: string
+        path?: string
+        url?: string
+        metadata?: SanityImageMetadata
+        source?: SanityAssetSourceData
+      } | null
+      media?: unknown
+      hotspot?: SanityImageHotspot
+      crop?: SanityImageCrop
+      alt?: string
+      _type: 'image'
+    } | null
+  } | null
+} | null
+
 // Query TypeMap
 import '@sanity/client'
 declare module '@sanity/client' {
@@ -824,5 +1198,6 @@ declare module '@sanity/client' {
     '\n  *[_type == "post" && slug.current == $slug] [0] {\n    content[]{\n    ...,\n    markDefs[]{\n      ...,\n      \n  _type == "link" => {\n    "page": page->slug.current,\n    "post": post->slug.current\n  }\n\n    }\n  },\n    \n  _id,\n  "status": select(_originalId in path("drafts.**") => "draft", "published"),\n  "title": coalesce(title, "Untitled"),\n  "slug": slug.current,\n  excerpt,\n  coverImage,\n  "date": coalesce(date, _updatedAt),\n  "author": author->{firstName, lastName, picture},\n\n  }\n': PostQueryResult
     '\n  *[_type == "post" && defined(slug.current)]\n  {"slug": slug.current}\n': PostPagesSlugsResult
     '\n  *[_type == "page" && defined(slug.current)]\n  {"slug": slug.current}\n': PagesSlugsResult
+    '\n  *[_type == "homepage"][0]{\n    _id,\n    _type,\n    hero {\n      badge,\n      headline,\n      subline,\n      bodyText,\n      cta,\n      heroImage {\n        ...,\n        asset->\n      }\n    },\n    services {\n      badge,\n      heading,\n      "servicesList": services[]->{\n        _id,\n        title,\n        "slug": slug.current,\n        shortDescription,\n        icon,\n        order\n      } | order(order asc),\n      cta\n    },\n    whyChoose {\n      badge,\n      heading,\n      bodyText,\n      features,\n      cta,\n      image {\n        ...,\n        asset->\n      }\n    },\n    stats {\n      heading,\n      bodyText,\n      "statsList": stats[]->{\n        _id,\n        number,\n        label,\n        accentColor,\n        order\n      } | order(order asc)\n    },\n    testimonials {\n      badge,\n      heading,\n      "testimonialsList": testimonials[]->{\n        _id,\n        quote,\n        authorName,\n        authorLabel,\n        rating\n      },\n      image {\n        ...,\n        asset->\n      }\n    }\n  }\n': HomepageQueryResult
   }
 }

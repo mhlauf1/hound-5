@@ -13,6 +13,144 @@
  */
 
 // Source: ../sanity.schema.json
+export type Cta = {
+  label?: string
+  href?: string
+  style?: 'solid' | 'outline'
+}
+
+export type ServicesCta = {
+  label?: string
+  href?: string
+  style?: 'solid' | 'outline'
+}
+
+export type WhyChooseCta = {
+  label?: string
+  href?: string
+  style?: 'solid' | 'outline'
+}
+
+export type TestimonialReference = {
+  _ref: string
+  _type: 'reference'
+  _weak?: boolean
+  [internalGroqTypeReferenceTo]?: 'testimonial'
+}
+
+export type SanityImageAssetReference = {
+  _ref: string
+  _type: 'reference'
+  _weak?: boolean
+  [internalGroqTypeReferenceTo]?: 'sanity.imageAsset'
+}
+
+export type TestimonialsSection = {
+  _type: 'testimonialsSection'
+  badge?: Badge
+  heading?: string
+  testimonials?: Array<
+    {
+      _key: string
+    } & TestimonialReference
+  >
+  image?: {
+    asset?: SanityImageAssetReference
+    media?: unknown
+    hotspot?: SanityImageHotspot
+    crop?: SanityImageCrop
+    alt?: string
+    _type: 'image'
+  }
+}
+
+export type StatItemReference = {
+  _ref: string
+  _type: 'reference'
+  _weak?: boolean
+  [internalGroqTypeReferenceTo]?: 'statItem'
+}
+
+export type StatsSection = {
+  _type: 'statsSection'
+  heading?: string
+  bodyText?: string
+  stats?: Array<
+    {
+      _key: string
+    } & StatItemReference
+  >
+}
+
+export type WhyChooseSection = {
+  _type: 'whyChooseSection'
+  badge?: Badge
+  heading?: string
+  bodyText?: BlockContentTextOnly
+  features?: Array<
+    {
+      _key: string
+    } & Feature
+  >
+  cta?: WhyChooseCta
+  image?: {
+    asset?: SanityImageAssetReference
+    media?: unknown
+    hotspot?: SanityImageHotspot
+    crop?: SanityImageCrop
+    alt?: string
+    _type: 'image'
+  }
+}
+
+export type ServiceOverviewReference = {
+  _ref: string
+  _type: 'reference'
+  _weak?: boolean
+  [internalGroqTypeReferenceTo]?: 'serviceOverview'
+}
+
+export type ServicesListSection = {
+  _type: 'servicesListSection'
+  badge?: Badge
+  heading?: string
+  services?: Array<
+    {
+      _key: string
+    } & ServiceOverviewReference
+  >
+  cta?: ServicesCta
+}
+
+export type HeroSection = {
+  _type: 'heroSection'
+  badge?: Badge
+  headline: string
+  subline?: string
+  bodyText?: string
+  cta?: Cta
+  heroImage?: {
+    asset?: SanityImageAssetReference
+    media?: unknown
+    hotspot?: SanityImageHotspot
+    crop?: SanityImageCrop
+    alt?: string
+    _type: 'image'
+  }
+}
+
+export type Feature = {
+  _type: 'feature'
+  label?: string
+  icon?: string
+}
+
+export type Badge = {
+  _type: 'badge'
+  text?: string
+  dotColor?: 'orange' | 'green' | 'brown'
+}
+
 export type PageReference = {
   _ref: string
   _type: 'reference'
@@ -34,13 +172,6 @@ export type Link = {
   page?: PageReference
   post?: PostReference
   openInNewTab?: boolean
-}
-
-export type SanityImageAssetReference = {
-  _ref: string
-  _type: 'reference'
-  _weak?: boolean
-  [internalGroqTypeReferenceTo]?: 'sanity.imageAsset'
 }
 
 export type CallToAction = {
@@ -125,6 +256,78 @@ export type Button = {
   link?: Link
 }
 
+export type ServiceOverview = {
+  _id: string
+  _type: 'serviceOverview'
+  _createdAt: string
+  _updatedAt: string
+  _rev: string
+  title: string
+  slug: Slug
+  shortDescription?: string
+  icon?: string
+  order: number
+}
+
+export type Slug = {
+  _type: 'slug'
+  current: string
+  source?: string
+}
+
+export type StatItem = {
+  _id: string
+  _type: 'statItem'
+  _createdAt: string
+  _updatedAt: string
+  _rev: string
+  number: string
+  label: string
+  accentColor?: 'orange' | 'green' | 'brown' | 'grey'
+  order: number
+}
+
+export type Testimonial = {
+  _id: string
+  _type: 'testimonial'
+  _createdAt: string
+  _updatedAt: string
+  _rev: string
+  quote: string
+  authorName: string
+  authorLabel?: string
+  rating?: number
+}
+
+export type Homepage = {
+  _id: string
+  _type: 'homepage'
+  _createdAt: string
+  _updatedAt: string
+  _rev: string
+  hero?: HeroSection
+  services?: ServicesListSection
+  whyChoose?: WhyChooseSection
+  stats?: StatsSection
+  testimonials?: TestimonialsSection
+}
+
+export type SanityImageCrop = {
+  _type: 'sanity.imageCrop'
+  top: number
+  bottom: number
+  left: number
+  right: number
+}
+
+export type SanityImageHotspot = {
+  _type: 'sanity.imageHotspot'
+  x: number
+  y: number
+  height: number
+  width: number
+}
+
 export type Settings = {
   _id: string
   _type: 'settings'
@@ -163,22 +366,20 @@ export type Settings = {
     metadataBase?: string
     _type: 'image'
   }
-}
-
-export type SanityImageCrop = {
-  _type: 'sanity.imageCrop'
-  top: number
-  bottom: number
-  left: number
-  right: number
-}
-
-export type SanityImageHotspot = {
-  _type: 'sanity.imageHotspot'
-  x: number
-  y: number
-  height: number
-  width: number
+  tagline?: string
+  phone?: string
+  email?: string
+  address?: {
+    street?: string
+    city?: string
+    state?: string
+    zip?: string
+  }
+  socialLinks?: Array<{
+    platform?: 'facebook' | 'instagram' | 'twitter' | 'youtube' | 'tiktok' | 'yelp' | 'google'
+    url?: string
+    _key: string
+  }>
 }
 
 export type Page = {
@@ -246,12 +447,6 @@ export type Person = {
     alt?: string
     _type: 'image'
   }
-}
-
-export type Slug = {
-  _type: 'slug'
-  current: string
-  source?: string
 }
 
 export type SanityAssistInstructionTask = {
@@ -488,23 +683,40 @@ export type Geopoint = {
 }
 
 export type AllSanitySchemaTypes =
+  | Cta
+  | ServicesCta
+  | WhyChooseCta
+  | TestimonialReference
+  | SanityImageAssetReference
+  | TestimonialsSection
+  | StatItemReference
+  | StatsSection
+  | WhyChooseSection
+  | ServiceOverviewReference
+  | ServicesListSection
+  | HeroSection
+  | Feature
+  | Badge
   | PageReference
   | PostReference
   | Link
-  | SanityImageAssetReference
   | CallToAction
   | InfoSection
   | BlockContentTextOnly
   | BlockContent
   | Button
-  | Settings
+  | ServiceOverview
+  | Slug
+  | StatItem
+  | Testimonial
+  | Homepage
   | SanityImageCrop
   | SanityImageHotspot
+  | Settings
   | Page
   | PersonReference
   | Post
   | Person
-  | Slug
   | SanityAssistInstructionTask
   | SanityAssistTaskStatus
   | SanityAssistSchemaTypeAnnotations

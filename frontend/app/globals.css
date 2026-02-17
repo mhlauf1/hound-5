@@ -2,6 +2,28 @@
 
 @plugin "@tailwindcss/typography";
 
+@custom-variant dark (&:where(.dark, .dark *));
+
+@theme {
+  --color-light-tan: #fef5ef;
+  --color-dark-brown: #3b2b28;
+  --color-brown: #703527;
+  --color-orange: #e37c3c;
+  --color-grey: #e6dfda;
+  --color-green: #b7e1c4;
+  --color-white: #ffffff;
+  --color-black: #0b0b0b;
+
+  --color-brand: #e37c3c;
+
+  --shadow-layer: 0 35px 60px -15px rgba(0, 0, 0, 0.3);
+
+  --default-transition-duration: 250ms;
+
+  --font-sans: var(--font-helvetica-neue), 'Helvetica Neue', Helvetica, system-ui, sans-serif;
+  --font-serif: var(--font-season-mix), Georgia, serif;
+}
+
 @layer base {
   h1,
   h2,
@@ -9,37 +31,26 @@
   h4,
   h5,
   h6 {
-    @apply font-medium tracking-tight;
+    font-family: var(--font-season-mix), Georgia, serif;
+    font-weight: 400;
+    letter-spacing: -0.02em;
+  }
+
+  body {
+    font-family: var(--font-helvetica-neue), 'Helvetica Neue', Helvetica, system-ui, sans-serif;
+    color: var(--color-dark-brown);
+    background-color: var(--color-light-tan);
   }
 }
 
 @utility container {
-  margin: 0 auto;
-  padding: 0 2rem;
+  margin-inline: auto;
+  max-width: 1280px;
+  padding-inline: 24px;
 }
 
-@custom-variant dark (&:where(.dark, .dark *));
-
-@theme {
-  --shadow-layer: 0 35px 60px -15px rgba(0, 0, 0, 0.3);
-
-  --color-framework: #000;
-  --color-black: #0b0b0b;
-  --color-white: #fff;
-  --color-brand: #f50;
-  --color-blue: #0052ff;
-  --color-yellow: #cdea19;
-  --color-gray-50: #f6f6f8;
-  --color-gray-100: #eeeef1;
-  --color-gray-200: #e3e4e8;
-  --color-gray-300: #bbbdc9;
-  --color-gray-400: #9499ad;
-  --color-gray-500: #727892;
-  --color-gray-600: #515870;
-  --color-gray-700: #383d51;
-  --color-gray-800: #252837;
-  --color-gray-900: #1b1d27;
-  --color-gray-950: #13141b;
-
-  --default-transition-duration: 250ms;
+@media (min-width: 768px) {
+  .container {
+    padding-inline: 64px;
+  }
 }

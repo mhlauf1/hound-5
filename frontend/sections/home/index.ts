@@ -1,0 +1,5 @@
+export {HeroSection} from './HeroSection'
+export {ServicesSection} from './ServicesSection'
+export {WhyChooseSection} from './WhyChooseSection'
+export {StatsSection} from './StatsSection'
+export {TestimonialsSection} from './TestimonialsSection'
