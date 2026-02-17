@@ -55,7 +55,7 @@ export function HeroSection({data}: {data: HeroData}) {
       <div className="">
         <div className="flex flex-col lg:flex-row h-auto lg:h-[36vh] ">
           {/* Left Column — 60% */}
-          <div className="flex flex-col-reverse md:flex-col pt-4 md:pt-10 px-6 md:px-12  gap-4 w-full lg:w-[65%]">
+          <div className="flex flex-col-reverse md:flex-col pt-4 md:pt-10 px-6 md:px-12  gap-2 md:gap-4 w-full lg:w-[65%]">
             <FadeIn delay={0.2}>
               <h1 className="font-serif max-w-[18ch] text-[42px] md:text-[56px] lg:[text-70px] xl:text-[88px] leading-[1.05] tracking-[-1px] text-brown">
                 {data.headline}
@@ -63,13 +63,15 @@ export function HeroSection({data}: {data: HeroData}) {
             </FadeIn>
             {data.subline && (
               <FadeIn delay={0.3}>
-                <p className="mt-4 font-sans  text-base md:text-lg text-brown/70">{data.subline}</p>
+                <p className="mt-3 md:mt-4 font-sans  text-base md:text-lg text-brown/70">
+                  {data.subline}
+                </p>
               </FadeIn>
             )}
           </div>
 
           {/* Right Column — 40% */}
-          <div className="flex pb-10 lg:pb-0 border-x pt-6 lg:pt-10 border-black/10 flex-col items-start px-6 md:px-12 lg:px-0 lg:items-center w-auto lg:w-[600px]">
+          <div className="flex pb-10 lg:pb-0 border-x pt-5 lg:pt-10 border-black/10 flex-col items-start px-6 md:px-12 lg:px-0 lg:items-center w-auto lg:w-[600px]">
             {data.bodyText && (
               <FadeIn delay={0.4}>
                 <div className="rounded-[12px]">

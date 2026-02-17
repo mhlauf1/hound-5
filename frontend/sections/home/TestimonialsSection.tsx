@@ -31,7 +31,7 @@ export function TestimonialsSection({data}: {data: TestimonialsData}) {
   return (
     <section className="grid grid-cols-1 lg:grid-cols-2">
       {/* Left Column — Light tan background */}
-      <div className="bg-grey flex flex-col justify-between px-6 md:px-12 lg:px-16 py-16 lg:py-24">
+      <div className="bg-grey flex flex-col justify-between px-6 md:px-12 lg:px-16 py-12 lg:py-24">
         <div>
           {data.badge?.text && (
             <FadeIn>
