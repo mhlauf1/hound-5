@@ -92,44 +92,47 @@ export function WhyChooseSection({data}: {data: WhyChooseData}) {
       </div>
 
       {/* Mobile layout — stacked content over image */}
+
       <div className="relative h-full flex flex-col justify-end lg:hidden">
         <div className="bg-light-tan pt-10 p-6 md:p-10">
-          {data.badge?.text && <Badge text={data.badge.text} />}
+          <FadeIn delay={0.3}>
+            {data.badge?.text && <Badge text={data.badge.text} />}
 
-          {data.heading && (
-            <h2 className="mt-4 font-serif text-[36px] md:text-[36px] leading-[1.15] text-dark-brown">
-              {data.heading}
-            </h2>
-          )}
+            {data.heading && (
+              <h2 className="mt-4 font-serif text-[36px] md:text-[36px] leading-[1.15] text-dark-brown">
+                {data.heading}
+              </h2>
+            )}
 
-          {data.bodyText && data.bodyText.length > 0 && (
-            <div className="mt-4 text-dark-brown/80">
-              <PortableText value={data.bodyText as PortableTextBlock[]} />
-            </div>
-          )}
+            {data.bodyText && data.bodyText.length > 0 && (
+              <div className="mt-4 text-dark-brown/80">
+                <PortableText value={data.bodyText as PortableTextBlock[]} />
+              </div>
+            )}
 
-          {data.features && data.features.length > 0 && (
-            <div className="mt-6 grid grid-cols-2 gap-3">
-              {data.features.map((feature) => (
-                <div key={feature._key} className="flex items-center gap-2">
-                  <span className="w-2 h-2 rounded-full bg-orange flex-shrink-0" />
-                  <span className="font-sans text-sm md:text-base text-dark-brown">
-                    {feature.label}
-                  </span>
-                </div>
-              ))}
-            </div>
-          )}
+            {data.features && data.features.length > 0 && (
+              <div className="mt-6 grid grid-cols-2 gap-3">
+                {data.features.map((feature) => (
+                  <div key={feature._key} className="flex items-center gap-2">
+                    <span className="w-2 h-2 rounded-full bg-orange flex-shrink-0" />
+                    <span className="font-sans text-sm md:text-base text-dark-brown">
+                      {feature.label}
+                    </span>
+                  </div>
+                ))}
+              </div>
+            )}
 
-          {data.cta?.label && data.cta?.href && (
-            <div className="mt-8">
-              <Button
-                label={data.cta.label}
-                href={data.cta.href}
-                variant={(data.cta.style as 'solid' | 'outline') || 'solid'}
-              />
-            </div>
-          )}
+            {data.cta?.label && data.cta?.href && (
+              <div className="mt-8">
+                <Button
+                  label={data.cta.label}
+                  href={data.cta.href}
+                  variant={(data.cta.style as 'solid' | 'outline') || 'solid'}
+                />
+              </div>
+            )}
+          </FadeIn>
         </div>
       </div>
     </section>

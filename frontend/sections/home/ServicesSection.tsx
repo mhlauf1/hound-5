@@ -84,7 +84,7 @@ export function ServicesSection({data}: {data: ServicesData}) {
         )}
 
         {data.cta?.label && data.cta?.href && (
-          <FadeIn className="px-6 md:px-16" delay={0.5}>
+          <FadeIn className="px-6 md:px-16" delay={0.3}>
             <div className="mt-10">
               <Button
                 label={data.cta.label}
