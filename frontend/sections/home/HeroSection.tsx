@@ -4,12 +4,14 @@ import {FadeIn} from '@/components/ui/FadeIn'
 import {Button} from '@/components/ui/Button'
 import Image from '@/app/components/SanityImage'
 import {useNavbarTheme} from '@/components/global/NavbarThemeProvider'
+import {useMediaQuery} from '@/hooks/useMediaQuery'
 import type {HomepageQueryResult} from '@/sanity.types'
 
 type HeroData = NonNullable<HomepageQueryResult>['hero']
 
 export function HeroSection({data}: {data: HeroData}) {
   const {setTheme} = useNavbarTheme()
+  const {matches: isMobile, ready} = useMediaQuery('(max-width: 767px)')
 
   useEffect(() => {
     setTheme('transparent')
@@ -56,25 +58,53 @@ export function HeroSection({data}: {data: HeroData}) {
         <div className="flex flex-col lg:flex-row h-auto lg:h-[36vh] ">
           {/* Left Column — 60% */}
           <div className="flex flex-col-reverse md:flex-col pt-4 md:pt-10 px-6 md:px-12  gap-2 md:gap-4 w-full lg:w-[65%]">
-            <FadeIn delay={0.2}>
-              <h1 className="font-serif max-w-[18ch] text-[42px] md:text-[56px] lg:[text-70px] xl:text-[88px] leading-[1.05] tracking-[-1px] text-brown">
+            {ready ? (
+              <FadeIn delay={isMobile ? 0.3 : 0.2}>
+                <h1 className="font-serif max-w-[18ch] text-[42px] md:text-[56px] lg:[text-70px] xl:text-[88px] leading-[1.05] tracking-[-1px] text-brown">
+                  {data.headline}
+                </h1>
+              </FadeIn>
+            ) : (
+              <h1 className="font-serif max-w-[18ch] text-[42px] md:text-[56px] lg:[text-70px] xl:text-[88px] leading-[1.05] tracking-[-1px] text-brown opacity-0">
                 {data.headline}
               </h1>
-            </FadeIn>
-            {data.subline && (
-              <FadeIn delay={0.3}>
-                <p className="mt-3 md:mt-4 font-sans  text-base md:text-lg text-brown/70">
+            )}
+            {data.subline &&
+              (ready ? (
+                <FadeIn delay={isMobile ? 0.1 : 0.3}>
+                  <p className="mt-3 md:mt-4 font-sans  text-base md:text-lg text-brown/70">
+                    {data.subline}
+                  </p>
+                </FadeIn>
+              ) : (
+                <p className="mt-3 md:mt-4 font-sans  text-base md:text-lg text-brown/70 opacity-0">
                   {data.subline}
                 </p>
-              </FadeIn>
-            )}
+              ))}
           </div>
 
           {/* Right Column — 40% */}
           <div className="flex pb-10 lg:pb-0 border-x pt-5 lg:pt-10 border-black/10 flex-col items-start px-6 md:px-12 lg:px-0 lg:items-center w-auto lg:w-[600px]">
-            {data.bodyText && (
-              <FadeIn delay={0.4}>
-                <div className="rounded-[12px]">
+            {data.bodyText &&
+              (ready ? (
+                <FadeIn delay={0.4}>
+                  <div className="rounded-[12px]">
+                    <p className="font-sans text-lg md:max-w-[41ch]  md:text-xl text-brown/80 leading-relaxed">
+                      {data.bodyText}
+                    </p>
+                    {data.cta?.label && data.cta?.href && (
+                      <div className="mt-6">
+                        <Button
+                          label={data.cta.label}
+                          href={data.cta.href}
+                          variant={(data.cta.style as 'solid' | 'outline') || 'solid'}
+                        />
+                      </div>
+                    )}
+                  </div>
+                </FadeIn>
+              ) : (
+                <div className="rounded-[12px] opacity-0">
                   <p className="font-sans text-lg md:max-w-[41ch]  md:text-xl text-brown/80 leading-relaxed">
                     {data.bodyText}
                   </p>
@@ -88,8 +118,7 @@ export function HeroSection({data}: {data: HeroData}) {
                     </div>
                   )}
                 </div>
-              </FadeIn>
-            )}
+              ))}
           </div>
         </div>
       </div>
